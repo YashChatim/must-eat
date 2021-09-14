@@ -1,13 +1,16 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
 
-import headerImage from "../../assets/headerImage.jpg";
-import classes from "./Header.module.css";
+import HeaderCartButton from './HeaderCartButton';
 
-const Header = props => {
+import headerImage from '../../assets/headerImage.jpg';
+import classes from './MainHeader.module.css';
+
+const MainHeader = props => {
     return (
         <Fragment>
             <header className={classes.header}>
                 <h1>MustEat</h1>
+                <HeaderCartButton />
             </header>
             <div className={classes['main-image']}>
                 <img src={headerImage} alt="MustEat Header Image" />
@@ -16,4 +19,4 @@ const Header = props => {
     );
 };
 
-export default Header;
+export default MainHeader;
