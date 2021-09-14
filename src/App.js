@@ -1,10 +1,15 @@
-import { Fragment } from "react";
-import Header from "./components/Layout/Header";
+import { Fragment } from 'react';
+
+import MainHeader from './components/Layout/MainHeader';
+import Meals from './components/Meals/Meals';
 
 function App() {
   return (
     <Fragment>
-      <Header />
+      <MainHeader />
+      <main>
+        <Meals />
+      </main>
     </Fragment>
   );
 }
