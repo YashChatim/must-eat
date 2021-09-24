@@ -1,7 +1,7 @@
 import React from 'react';
 
-{/* Context - pass data through the component tree without passing props down manually at every level */}
 const CartContext = React.createContext({
+    // Context - pass data through the component tree without passing props down manually at every level
     mealItems: [],
     totalAmount: 0,
     addMealItem: item => {},
