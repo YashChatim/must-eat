@@ -1,3 +1,5 @@
+import Actions from '../UI/Actions';
+
 import classes from './CartMealItem.module.css';
 
 const CartMealItem = (props) => {
@@ -10,10 +12,13 @@ const CartMealItem = (props) => {
                     <span className={classes.amount}>x {props.amount}</span>
                 </div>
             </div>
-            <div className={classes.actions}>
-                <button onClick={props.onAdd}>+</button>
-                <button onClick={props.onRemove}>−</button>
-            </div>
+            <Actions 
+                outerClass={classes.actions}
+                onLeftButton={props.onAdd}
+                leftButtonText='+'
+                onRightButton={props.onRemove}
+                rightButtonText='−'
+            />
         </li>
     );
 };

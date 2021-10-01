@@ -3,13 +3,13 @@ import { useContext } from 'react';
 import Modal from '../UI/Modal';
 import CartMealItem from './CartMealItem';
 import CartContext from '../../store/CartContext';
+import Actions from '../UI/Actions';
 
 import classes from './Cart.module.css';
 
 const Cart = props => {
     const cartContext = useContext(CartContext);
     const totalAmount = `£${cartContext.totalAmount}`;
-
     const hasMealItems = cartContext.mealItems.length > 0;
 
     const addMealItemFromCartHandler = item => {
@@ -35,10 +35,15 @@ const Cart = props => {
                 )}
             </div>
             <div className={classes.total}>Total amount: {totalAmount}</div>
-            <div className={classes.actions}>
-                <button className={classes['button-alt']} onClick={props.onHideCart}>Close</button>
-                {hasMealItems && <button className={classes.order}>Place Order</button>}
-            </div>
+            <Actions 
+                outerClass={classes.actions}
+                leftButtonClass={classes['button-alt']}
+                onLeftButton={props.onHideCart}
+                leftButtonText='Close'
+                rightButtonClass={classes.order}
+                rightButtonText='Place Order'
+                onDisplayButton={hasMealItems ? 'inline-block' : 'none'}
+            />
         </Modal>
     );
 };
