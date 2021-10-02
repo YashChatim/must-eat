@@ -8,8 +8,26 @@ const initialCartState = {
 
 const cartReducer = (state, action) => {
     if (action.type === 'AddItem' ) {
-        const updatedMealItems = state.mealItems.concat(action.item);
         const updatedTotalAmount = state.totalAmount + (action.item.price * action.item.amount);
+
+        // findIndex - finds the index of item in an array
+        const existingCartMealItemIndex = state.mealItems.findIndex(
+            item => item.id === action.item.id
+        );
+
+        const existingCartMealItem = state.mealItems[existingCartMealItemIndex];
+
+        let updatedMealItems;
+        if (existingCartMealItem) {
+            const updatedMealItem = {
+                ...existingCartMealItem,
+                amount: existingCartMealItem.amount + action.item.amount
+            };
+            updatedMealItems = [...state.mealItems];
+            updatedMealItems[existingCartMealItemIndex] = updatedMealItem;
+        } else {
+            updatedMealItems = state.mealItems.concat(action.item);
+        }
 
         return {
             mealItems: updatedMealItems,
@@ -18,7 +36,29 @@ const cartReducer = (state, action) => {
     }
 
     if (action.type === 'RemoveItem' ) {
+        const existingCartMealItemIndex = state.mealItems.findIndex(
+            item => item.id === action.id
+        );
 
+        const existingCartMealItem = state.mealItems[existingCartMealItemIndex];
+        const updatedTotalAmount = state.totalAmount - existingCartMealItem.price;
+
+        let updatedMealItems;
+        if (existingCartMealItem.amount === 1) {
+            // filter - creates a new array with all elements that pass the test
+            updatedMealItems = state.mealItems.filter(
+                item => item.id !== action.id
+            );
+        } else {
+            const updatedMealItem = { ...existingCartMealItem, amount: existingCartMealItem.amount - 1 };
+            updatedMealItems = [...state.mealItems];
+            updatedMealItems[existingCartMealItemIndex] = updatedMealItem;
+        }
+
+        return {
+            mealItems: updatedMealItems,
+            totalAmount: updatedTotalAmount
+        }
     }
 
     return initialCartState;

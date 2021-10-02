@@ -13,7 +13,7 @@ const Cart = props => {
     const hasMealItems = cartContext.mealItems.length > 0;
 
     const addMealItemFromCartHandler = item => {
-
+        cartContext.addMealItem({ ...item, amount: 1 });
     }
 
     const removeMealItemFromCartHandler = item => {
