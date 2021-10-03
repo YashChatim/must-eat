@@ -17,7 +17,7 @@ const Cart = props => {
     }
 
     const removeMealItemFromCartHandler = item => {
-
+        cartContext.removeMealItem(item);
     }
 
     return (
@@ -29,8 +29,8 @@ const Cart = props => {
                         name={item.name}
                         amount={item.amount}
                         price={item.price}
-                        onAdd={addMealItemFromCartHandler.bind(item.id)} // bind - binds to a specific object
-                        onRemove={removeMealItemFromCartHandler.bind(item.id)}
+                        onAdd={() => addMealItemFromCartHandler(item)}
+                        onRemove={() => removeMealItemFromCartHandler(item)}
                     />    
                 )}
             </div>
